@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sectionizer
+package com.alexyuzefovich.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
