@@ -1,18 +1,9 @@
 package com.alexyuzefovich.sectionizer
 
-import kotlinx.coroutines.CoroutineScope
-
-abstract class LoaderDelegate<T, P>(
-    private val coroutineScope: CoroutineScope
-) {
+abstract class LoaderDelegate<T, P : LoadParams> {
 
     abstract val params: P
 
-    fun loadData(
-        successAction: (List<T>) -> Unit,
-        failureAction: (Throwable) -> Unit
-    ) {
-
-    }
+    abstract fun loadData(): LoadResult<T>
 
 }

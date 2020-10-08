@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample
+package com.alexyuzefovich.sample.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +9,7 @@ import com.alexyuzefovich.sectionizer.Section
 import com.alexyuzefovich.sectionizer.SectionAdapter
 
 class SectionListAdapter :
-    ListAdapter<Section<*, *>, SectionListAdapter.ViewHolder>(Section.DiffUtilCallback),
-    SectionAdapter<Section<*, *>>
+    ListAdapter<Section<*, *>, SectionListAdapter.ViewHolder>(Section.DiffUtilCallback)
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,10 +20,6 @@ class SectionListAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
-    }
-
-    override fun submitData(items: List<Section<*, *>>) {
-        submitList(items)
     }
 
 

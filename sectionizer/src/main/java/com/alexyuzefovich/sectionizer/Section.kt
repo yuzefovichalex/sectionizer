@@ -26,12 +26,8 @@ abstract class Section<T, A>
 
     fun loadInto(rv: RecyclerView) {
         rv.adapter = adapter
-        loaderDelegate.loadData(
-            successAction = {
-                adapter.submitData(it)
-            },
-            failureAction = { }
-        )
+        val result = loaderDelegate.loadData()
+        adapter.submitData(result.items)
     }
 
 }
