@@ -2,15 +2,13 @@ package com.alexyuzefovich.sample.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.databinding.ItemSectionBinding
+import com.alexyuzefovich.sample.model.SimpleSection
 import com.alexyuzefovich.sectionizer.Section
-import com.alexyuzefovich.sectionizer.SectionAdapter
+import com.alexyuzefovich.sectionizer.SectionsAdapter
 
-class SectionListAdapter :
-    ListAdapter<Section<*, *>, SectionListAdapter.ViewHolder>(Section.DiffUtilCallback)
-{
+class SimpleSectionsAdapter : SectionsAdapter<SimpleSectionsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -18,17 +16,20 @@ class SectionListAdapter :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
 
     class ViewHolder(
         private val binding: ItemSectionBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : SectionsAdapter.ViewHolder(binding.root) {
 
-        fun bind(section: Section<*, *>) {
-            section.loadInto(binding.itemList)
+        override val sectionRV: RecyclerView
+            get() = binding.itemList
+
+        override fun bind(section: Section<*, *>) {
+            if (section is SimpleSection) {
+                with(binding) {
+                    name.text = section.name
+                }
+            }
         }
 
     }

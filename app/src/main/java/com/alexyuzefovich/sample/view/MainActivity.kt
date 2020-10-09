@@ -1,13 +1,12 @@
 package com.alexyuzefovich.sample.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ActivityMainBinding
-import com.alexyuzefovich.sample.model.FoodCategory
 import com.alexyuzefovich.sample.model.FoodCategorySection
-import com.alexyuzefovich.sample.util.fromJson
 import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
-import com.alexyuzefovich.sample.view.adapter.SectionListAdapter
+import com.alexyuzefovich.sample.view.adapter.SimpleSectionsAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,14 +25,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSections() {
         val sections = listOf(foodCategorySection)
-        binding.sections.adapter = SectionListAdapter().apply {
+        binding.sections.adapter = SimpleSectionsAdapter().apply {
             submitList(sections)
         }
     }
 
-    val foodCategorySection = FoodCategorySection(
-        FoodCategoryAdapter(),
-        FoodCategoryLoader(this)
-    )
+    val foodCategorySection: FoodCategorySection by lazy {
+        FoodCategorySection(
+            getString(R.string.food_categories),
+            FoodCategoryAdapter(),
+            FoodCategoryLoader(this)
+        )
+    }
 
 }
