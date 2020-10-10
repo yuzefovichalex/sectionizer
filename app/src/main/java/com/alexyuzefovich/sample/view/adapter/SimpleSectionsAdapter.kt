@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.databinding.ItemSectionBinding
 import com.alexyuzefovich.sample.model.SimpleSection
+import com.alexyuzefovich.sample.util.HorizontalSpaceItemDecoration
+import com.alexyuzefovich.sample.util.dp
 import com.alexyuzefovich.sectionizer.Section
 import com.alexyuzefovich.sectionizer.SectionsAdapter
 
@@ -12,7 +14,11 @@ class SimpleSectionsAdapter : SectionsAdapter<SimpleSectionsAdapter.ViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemSectionBinding.inflate(inflater, parent, false)
+        val binding = ItemSectionBinding.inflate(inflater, parent, false).apply {
+            itemList.addItemDecoration(
+                HorizontalSpaceItemDecoration(8.dp)
+            )
+        }
         return ViewHolder(binding)
     }
 

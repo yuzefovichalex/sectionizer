@@ -11,6 +11,8 @@
         android:id="@+id/sections"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingTop="@dimen/space_1x"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
