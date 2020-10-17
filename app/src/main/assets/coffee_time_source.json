@@ -1,30 +1,36 @@
 [
   {
+    "id": 11,
     "name": "Espresso",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Espresso.png",
     "cost": 3.0
   },
   {
+    "id": 12,
     "name": "Americano",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Americano.png",
     "cost": 5.0
   },
   {
+    "id": 13,
     "name": "Flat White",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Flat.png",
     "cost": 3.6
   },
   {
+    "id": 14,
     "name": "Cappuccino",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Cappuccino.png",
     "cost": 6.0
   },
   {
+    "id": 15,
     "name": "Latte",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Flat.png",
     "cost": 6.0
   },
   {
+    "id": 16,
     "name": "Macchiato",
     "image": "https://www.philips.ru/c-dam/b2c/category-pages/Household/coffee/master/faq/cups/Productimg_Espresso-Macchiato.png",
     "cost": 4.0
