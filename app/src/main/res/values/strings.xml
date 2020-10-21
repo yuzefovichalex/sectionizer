@@ -3,4 +3,5 @@
 
     <string name="coffee_time">Coffee time</string>
     <string name="food_categories">Food categories</string>
+    <string name="cost">%f$</string>
 </resources>

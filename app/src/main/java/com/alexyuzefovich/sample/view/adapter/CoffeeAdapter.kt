@@ -1,10 +1,12 @@
 package com.alexyuzefovich.sample.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ItemCoffeeBinding
 import com.alexyuzefovich.sample.model.Coffee
 import com.alexyuzefovich.sample.util.glide
@@ -46,10 +48,14 @@ class CoffeeAdapter :
         private val binding: ItemCoffeeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val context: Context
+            get() = binding.root.context
+
         fun bind(coffee: Coffee) {
             with(binding) {
                 image.glide(coffee.imageUrl)
                 name.text = coffee.name
+                cost.text = context.getString(R.string.cost, coffee.cost)
             }
         }
 
