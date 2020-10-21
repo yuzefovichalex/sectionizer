@@ -6,10 +6,12 @@ import com.alexyuzefovich.sample.util.fromJson
 import com.alexyuzefovich.sectionizer.LoadParams
 import com.alexyuzefovich.sectionizer.LoadResult
 import com.alexyuzefovich.sectionizer.LoaderDelegate
+import kotlinx.coroutines.CoroutineScope
 
 class TopFoodLoader(
-    private val context: Context
-) : LoaderDelegate<Food, LoadParams>() {
+    private val context: Context,
+    coroutineScope: CoroutineScope
+) : LoaderDelegate<Food, LoadParams>(coroutineScope) {
 
     override val params: LoadParams = LoadParams.EMPTY
 

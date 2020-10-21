@@ -6,10 +6,12 @@ import com.alexyuzefovich.sample.util.fromJson
 import com.alexyuzefovich.sectionizer.LoadParams
 import com.alexyuzefovich.sectionizer.LoadResult
 import com.alexyuzefovich.sectionizer.LoaderDelegate
+import kotlinx.coroutines.CoroutineScope
 
 class CoffeeLoader(
-    private val context: Context
-) : LoaderDelegate<Coffee, LoadParams>() {
+    private val context: Context,
+    coroutineScope: CoroutineScope
+) : LoaderDelegate<Coffee, LoadParams>(coroutineScope) {
 
     override val params: LoadParams = LoadParams.EMPTY
 

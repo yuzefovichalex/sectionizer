@@ -1,6 +1,10 @@
 package com.alexyuzefovich.sectionizer
 
-abstract class LoaderDelegate<T, P : LoadParams> {
+import kotlinx.coroutines.CoroutineScope
+
+abstract class LoaderDelegate<T, P : LoadParams>(
+    val coroutineScope: CoroutineScope
+) {
 
     abstract val params: P
 

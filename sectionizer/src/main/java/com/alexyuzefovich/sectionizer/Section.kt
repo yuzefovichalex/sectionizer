@@ -2,6 +2,7 @@ package com.alexyuzefovich.sectionizer
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 abstract class Section<T, A>
         where A : RecyclerView.Adapter<*>,
@@ -24,10 +25,12 @@ abstract class Section<T, A>
 
     abstract fun isTheSameWith(another: Section<*, *>): Boolean
 
-    fun loadInto(rv: RecyclerView) {
+    internal fun loadInto(rv: RecyclerView) {
         rv.adapter = adapter
-        val result = loaderDelegate.loadData()
-        adapter.submitData(result.items)
+        loaderDelegate.coroutineScope.launch {
+            val result = loaderDelegate.loadData()
+            adapter.submitData(result.items)
+        }
     }
 
 }
