@@ -6,7 +6,9 @@ import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ActivityMainBinding
 import com.alexyuzefovich.sample.model.CoffeeTimeSection
 import com.alexyuzefovich.sample.model.FoodCategorySection
+import com.alexyuzefovich.sample.model.TopFoodSection
 import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
+import com.alexyuzefovich.sample.view.adapter.FoodAdapter
 import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
 import com.alexyuzefovich.sample.view.adapter.SimpleSectionsAdapter
 
@@ -26,10 +28,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSections() {
-        val sections = listOf(coffeeSection, foodCategorySection)
+        val sections = listOf(topFoodSection, coffeeSection, foodCategorySection)
         binding.sections.adapter = SimpleSectionsAdapter().apply {
             submitList(sections)
         }
+    }
+
+    val topFoodSection: TopFoodSection by lazy {
+        TopFoodSection(
+            getString(R.string.on_a_pedestal),
+            FoodAdapter(),
+            TopFoodLoader(this)
+        )
     }
 
     val coffeeSection: CoffeeTimeSection by lazy {

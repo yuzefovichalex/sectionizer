@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Sectionizer</string>
 
+    <string name="on_a_pedestal">On a pedestal</string>
     <string name="coffee_time">Coffee time</string>
     <string name="food_categories">Food categories</string>
     <string name="cost">%f$</string>
