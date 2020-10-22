@@ -1,24 +1,21 @@
-package com.alexyuzefovich.sample.view
+package com.alexyuzefovich.sample.repository.loader
 
-import android.content.Context
 import com.alexyuzefovich.sample.model.Coffee
-import com.alexyuzefovich.sample.util.fromJson
+import com.alexyuzefovich.sample.repository.SampleRepository
 import com.alexyuzefovich.sectionizer.LoadParams
 import com.alexyuzefovich.sectionizer.LoadResult
 import com.alexyuzefovich.sectionizer.LoaderDelegate
 import kotlinx.coroutines.CoroutineScope
 
 class CoffeeLoader(
-    private val context: Context,
+    private val repository: SampleRepository,
     coroutineScope: CoroutineScope
 ) : LoaderDelegate<Coffee, LoadParams>(coroutineScope) {
 
     override val params: LoadParams = LoadParams.EMPTY
 
     override fun loadData(): LoadResult<Coffee> {
-        val coffee = context.assets.open("coffee_time_source.json")
-            .bufferedReader()
-            .fromJson<List<Coffee>>()
+        val coffee = repository.loadCoffee()
         return LoadResult(coffee)
     }
 

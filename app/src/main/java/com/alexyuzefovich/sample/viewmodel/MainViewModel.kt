@@ -2,46 +2,20 @@ package com.alexyuzefovich.sample.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alexyuzefovich.sample.R
-import com.alexyuzefovich.sample.model.CoffeeTimeSection
-import com.alexyuzefovich.sample.model.FoodCategorySection
-import com.alexyuzefovich.sample.model.TopFoodSection
-import com.alexyuzefovich.sample.view.CoffeeLoader
-import com.alexyuzefovich.sample.view.FoodCategoryLoader
-import com.alexyuzefovich.sample.view.TopFoodLoader
-import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
-import com.alexyuzefovich.sectionizer.Section
+import com.alexyuzefovich.sample.repository.SampleRepository
+import com.alexyuzefovich.sample.repository.loader.CoffeeLoader
+import com.alexyuzefovich.sample.repository.loader.FoodCategoryLoader
+import com.alexyuzefovich.sample.repository.loader.TopFoodLoader
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val topFoodSection: TopFoodSection by lazy {
-        TopFoodSection(
-            application.getString(R.string.on_a_pedestal),
-            FoodAdapter(),
-            TopFoodLoader(application, viewModelScope)
-        )
-    }
+    private val repository: SampleRepository = SampleRepository(application)
 
-    private val coffeeSection: CoffeeTimeSection by lazy {
-        CoffeeTimeSection(
-            application.getString(R.string.coffee_time),
-            CoffeeAdapter(),
-            CoffeeLoader(application, viewModelScope)
-        )
-    }
+    val topFoodLoader: TopFoodLoader = TopFoodLoader(repository, viewModelScope)
 
-    private val foodCategorySection: FoodCategorySection by lazy {
-        FoodCategorySection(
-            application.getString(R.string.food_categories),
-            FoodCategoryAdapter(),
-            FoodCategoryLoader(application, viewModelScope)
-        )
-    }
+    val coffeeLoader: CoffeeLoader = CoffeeLoader(repository, viewModelScope)
 
-    val sections: List<Section<*, *>> = listOf(topFoodSection, coffeeSection, foodCategorySection)
+    val foodCategoryLoader: FoodCategoryLoader = FoodCategoryLoader(repository, viewModelScope)
 
 }

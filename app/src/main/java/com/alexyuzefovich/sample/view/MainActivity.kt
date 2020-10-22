@@ -32,8 +32,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSections() {
+        val sections = listOf(
+            TopFoodSection(
+                getString(R.string.on_a_pedestal),
+                FoodAdapter(),
+                mainViewModel.topFoodLoader
+            ),
+            CoffeeTimeSection(
+                getString(R.string.coffee_time),
+                CoffeeAdapter(),
+                mainViewModel.coffeeLoader
+            ),
+            FoodCategorySection(
+                getString(R.string.food_categories),
+                FoodCategoryAdapter(),
+                mainViewModel.foodCategoryLoader
+            )
+        )
         binding.sections.adapter = SimpleSectionsAdapter().apply {
-            submitList(mainViewModel.sections)
+            submitList(sections)
         }
     }
 
