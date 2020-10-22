@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.databinding.ItemHorizontalSectionBinding
 import com.alexyuzefovich.sample.databinding.ItemVerticalSectionBinding
-import com.alexyuzefovich.sample.model.SimpleSection
+import com.alexyuzefovich.sample.model.HorizontalSection
+import com.alexyuzefovich.sample.model.VerticalSection
 import com.alexyuzefovich.sample.util.HorizontalSpaceItemDecoration
 import com.alexyuzefovich.sample.util.dp
 import com.alexyuzefovich.sectionizer.Section
 import com.alexyuzefovich.sectionizer.SectionsAdapter
 import java.lang.IllegalArgumentException
 
-class SimpleSectionsAdapter : SectionsAdapter<SectionsAdapter.ViewHolder>() {
+class MultipleTypeSectionsAdapter :
+    SectionsAdapter<Section<*, *>, SectionsAdapter.ViewHolder<Section<*, *>>>()
+{
 
     companion object {
         private const val VERTICAL_SECTION = 0
@@ -25,16 +28,13 @@ class SimpleSectionsAdapter : SectionsAdapter<SectionsAdapter.ViewHolder>() {
             else -> HORIZONTAL_SECTION
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    @Suppress("UNCHECKED_CAST")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<Section<*, *>> {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             VERTICAL_SECTION -> {
-                val binding = ItemVerticalSectionBinding.inflate(inflater, parent, false).apply {
-                    itemList.addItemDecoration(
-                        HorizontalSpaceItemDecoration(8.dp)
-                    )
-                }
-                VerticalViewHolder(binding)
+                val binding = ItemVerticalSectionBinding.inflate(inflater, parent, false)
+                VerticalViewHolder(binding) as ViewHolder<Section<*, *>>
             }
             HORIZONTAL_SECTION -> {
                 val binding = ItemHorizontalSectionBinding.inflate(inflater, parent, false).apply {
@@ -42,7 +42,7 @@ class SimpleSectionsAdapter : SectionsAdapter<SectionsAdapter.ViewHolder>() {
                         HorizontalSpaceItemDecoration(8.dp)
                     )
                 }
-                HorizontalViewHolder(binding)
+                HorizontalViewHolder(binding) as ViewHolder<Section<*, *>>
             }
             else -> throw IllegalArgumentException("viewType must be VERTICAL_SECTION or HORIZONTAL_SECTION")
         }
@@ -50,16 +50,14 @@ class SimpleSectionsAdapter : SectionsAdapter<SectionsAdapter.ViewHolder>() {
 
     class VerticalViewHolder(
         private val binding: ItemVerticalSectionBinding
-    ) : ViewHolder(binding.root) {
+    ) : ViewHolder<VerticalSection<*, *>>(binding.root) {
 
         override val sectionRV: RecyclerView
             get() = binding.itemList
 
-        override fun bind(section: Section<*, *>) {
-            if (section is SimpleSection) {
-                with(binding) {
-                    name.text = section.name
-                }
+        override fun bind(section: VerticalSection<*, *>) {
+            with(binding) {
+                name.text = section.name
             }
         }
 
@@ -67,16 +65,14 @@ class SimpleSectionsAdapter : SectionsAdapter<SectionsAdapter.ViewHolder>() {
 
     class HorizontalViewHolder(
         private val binding: ItemHorizontalSectionBinding
-    ) : ViewHolder(binding.root) {
+    ) : ViewHolder<HorizontalSection<*, *>>(binding.root) {
 
         override val sectionRV: RecyclerView
             get() = binding.itemList
 
-        override fun bind(section: Section<*, *>) {
-            if (section is SimpleSection) {
-                with(binding) {
-                    name.text = section.name
-                }
+        override fun bind(section: HorizontalSection<*, *>) {
+            with(binding) {
+                name.text = section.name
             }
         }
 

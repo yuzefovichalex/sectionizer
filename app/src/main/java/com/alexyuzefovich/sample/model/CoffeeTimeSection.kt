@@ -7,4 +7,4 @@ class CoffeeTimeSection(
     override val name: String,
     override val adapter: CoffeeAdapter,
     override val loaderDelegate: LoaderDelegate<Coffee, *>
-) : SimpleSection<Coffee, CoffeeAdapter>()
+) : HorizontalSection<Coffee, CoffeeAdapter>()

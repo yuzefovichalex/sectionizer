@@ -7,4 +7,4 @@ class TopFoodSection(
     override val name: String,
     override val adapter: FoodAdapter,
     override val loaderDelegate: LoaderDelegate<Food, *>
-) : SimpleSection<Food, FoodAdapter>()
+) : VerticalSection<Food, FoodAdapter>()

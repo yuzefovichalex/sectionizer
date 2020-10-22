@@ -11,7 +11,7 @@ import com.alexyuzefovich.sample.model.TopFoodSection
 import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
 import com.alexyuzefovich.sample.view.adapter.FoodAdapter
 import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
-import com.alexyuzefovich.sample.view.adapter.SimpleSectionsAdapter
+import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
 import com.alexyuzefovich.sample.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.foodCategoryLoader
             )
         )
-        binding.sections.adapter = SimpleSectionsAdapter().apply {
+        binding.sections.adapter = MultipleTypeSectionsAdapter().apply {
             submitList(sections)
         }
     }

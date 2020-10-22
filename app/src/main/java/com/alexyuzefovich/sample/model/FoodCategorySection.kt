@@ -7,4 +7,4 @@ class FoodCategorySection(
     override val name: String,
     override val adapter: FoodCategoryAdapter,
     override val loaderDelegate: LoaderDelegate<FoodCategory, *>
-) : SimpleSection<FoodCategory, FoodCategoryAdapter>()
+) : HorizontalSection<FoodCategory, FoodCategoryAdapter>()
