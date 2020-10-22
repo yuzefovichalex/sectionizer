@@ -10,14 +10,14 @@ abstract class Section<T, A>
 
     abstract val adapter: A
 
-    abstract val loaderDelegate: LoaderDelegate<T, *>
+    abstract val sectionDataLoader: SectionDataLoader<T, *>
 
     abstract fun isTheSameWith(another: Section<*, *>): Boolean
 
     internal fun loadInto(rv: RecyclerView) {
         rv.adapter = adapter
-        loaderDelegate.coroutineScope.launch {
-            val result = loaderDelegate.loadData()
+        sectionDataLoader.coroutineScope.launch {
+            val result = sectionDataLoader.loadData()
             adapter.submitData(result.items)
         }
     }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> :
     ListAdapter<S, VH>(DiffUtilCallback())
 {
-    
+
     final override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindAndLoadData(getItem(position))
     }

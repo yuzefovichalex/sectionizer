@@ -4,13 +4,13 @@ import com.alexyuzefovich.sample.model.Food
 import com.alexyuzefovich.sample.repository.SampleRepository
 import com.alexyuzefovich.sectionizer.LoadParams
 import com.alexyuzefovich.sectionizer.LoadResult
-import com.alexyuzefovich.sectionizer.LoaderDelegate
+import com.alexyuzefovich.sectionizer.SectionDataLoader
 import kotlinx.coroutines.CoroutineScope
 
 class TopFoodLoader(
     private val repository: SampleRepository,
     coroutineScope: CoroutineScope
-) : LoaderDelegate<Food, LoadParams>(coroutineScope) {
+) : SectionDataLoader<Food, LoadParams>(coroutineScope) {
 
     override val params: LoadParams = LoadParams.EMPTY
 
