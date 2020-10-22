@@ -11,4 +11,7 @@ abstract class SimpleSection<T, A> : Section<T, A>()
 
     abstract val name: String
 
+    override fun isTheSameWith(another: Section<*, *>): Boolean =
+        another is SimpleSection && name == another.name
+
 }
