@@ -6,5 +6,5 @@ import com.alexyuzefovich.sectionizer.SectionDataLoader
 class CoffeeTimeSection(
     override val name: String,
     override val adapter: CoffeeAdapter,
-    val sectionDataLoader: SectionDataLoader<Coffee, *>
+    override val sectionDataLoader: SectionDataLoader<Coffee, *>
 ) : HorizontalSection<Coffee, CoffeeAdapter>()

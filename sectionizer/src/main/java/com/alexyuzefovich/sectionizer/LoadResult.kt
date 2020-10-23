@@ -1,5 +1,6 @@
 package com.alexyuzefovich.sectionizer
 
-class LoadResult<T>(
-    val items: List<T>
-)
+sealed class LoadResult<out T> {
+    data class Success<out T>(val items: List<T>) : LoadResult<T>()
+    data class Error(val throwable: Throwable?) : LoadResult<Nothing>()
+}

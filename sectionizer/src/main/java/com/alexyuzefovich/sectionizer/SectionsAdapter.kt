@@ -18,11 +18,13 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
 
         abstract val sectionRV: RecyclerView
 
+        var loadCallback: Section.LoadCallback? = null
+
         open fun bind(section: S) { }
 
         internal fun bindAndLoadData(section: S) {
             bind(section)
-            section.loadInto(sectionRV)
+            section.loadInto(this)
         }
 
     }

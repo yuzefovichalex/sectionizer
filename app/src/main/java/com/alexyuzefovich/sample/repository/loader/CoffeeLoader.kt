@@ -16,7 +16,7 @@ class CoffeeLoader(
 
     override fun loadData(): LoadResult<Coffee> {
         val coffee = repository.loadCoffee()
-        return LoadResult(coffee)
+        return LoadResult.Success(coffee)
     }
 
 }

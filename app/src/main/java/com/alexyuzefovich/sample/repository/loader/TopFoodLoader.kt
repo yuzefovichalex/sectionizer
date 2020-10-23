@@ -16,7 +16,7 @@ class TopFoodLoader(
 
     override fun loadData(): LoadResult<Food> {
         val topFood = repository.loadTopFood()
-        return LoadResult(topFood)
+        return LoadResult.Success(topFood)
     }
 
 }

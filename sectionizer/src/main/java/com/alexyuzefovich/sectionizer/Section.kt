@@ -8,17 +8,32 @@ abstract class Section<T, A>
               A : SectionAdapter<T>
 {
 
+    interface LoadCallback {
+        fun onLoadStart()
+        fun onLoadSuccess()
+        fun onLoadError(throwable: Throwable?)
+    }
+
+
     abstract val adapter: A
 
     abstract val sectionDataLoader: SectionDataLoader<T, *>
 
     abstract fun isTheSameWith(another: Section<*, *>): Boolean
 
-    internal fun loadInto(rv: RecyclerView) {
-        rv.adapter = adapter
-        sectionDataLoader.coroutineScope.launch {
-            val result = sectionDataLoader.loadData()
-            adapter.submitData(result.items)
+    internal fun loadInto(viewHolder: SectionsAdapter.ViewHolder<*>) {
+        with(viewHolder) {
+            sectionRV.adapter = adapter
+            loadCallback?.onLoadStart()
+            sectionDataLoader.coroutineScope.launch {
+                when (val result = sectionDataLoader.loadData()) {
+                    is LoadResult.Success -> {
+                        loadCallback?.onLoadSuccess()
+                        adapter.submitData(result.items)
+                    }
+                    is LoadResult.Error -> loadCallback?.onLoadError(result.throwable)
+                }
+            }
         }
     }
 

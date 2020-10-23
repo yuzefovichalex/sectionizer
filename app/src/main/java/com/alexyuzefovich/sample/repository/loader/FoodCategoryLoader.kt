@@ -16,7 +16,7 @@ class FoodCategoryLoader(
 
     override fun loadData(): LoadResult<FoodCategory> {
         val foodCategories = repository.loadFoodCategories()
-        return LoadResult(foodCategories)
+        return LoadResult.Success(foodCategories)
     }
 
 }
