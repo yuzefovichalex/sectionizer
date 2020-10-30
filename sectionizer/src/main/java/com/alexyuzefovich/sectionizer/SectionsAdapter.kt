@@ -1,6 +1,7 @@
 package com.alexyuzefovich.sectionizer
 
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> :
     ListAdapter<S, VH>(DiffUtilCallback())
 {
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        recyclerView.itemAnimator?.let {
+            if (it is DefaultItemAnimator) {
+                it.supportsChangeAnimations = false
+            }
+        }
+    }
 
     final override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindAndLoadData(getItem(position))
@@ -33,7 +42,7 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         override fun areItemsTheSame(oldItem: S, newItem: S): Boolean =
             oldItem.isTheSameWith(newItem)
 
-        override fun areContentsTheSame(oldItem: S, newItem: S): Boolean = true
+        override fun areContentsTheSame(oldItem: S, newItem: S): Boolean = false
     }
 
 }
