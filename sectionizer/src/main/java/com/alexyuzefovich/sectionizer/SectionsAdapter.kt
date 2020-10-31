@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> :
-    ListAdapter<S, VH>(DiffUtilCallback())
-{
+abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>>(
+    areSectionsStatic: Boolean = false
+) : ListAdapter<S, VH>(DiffUtilCallback(areSectionsStatic)) {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         recyclerView.itemAnimator?.let {
@@ -38,11 +38,16 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
 
     }
 
-    private class DiffUtilCallback<S : Section<*, *>> : DiffUtil.ItemCallback<S>() {
+    private class DiffUtilCallback<S : Section<*, *>>(
+        private val areSectionsStatic: Boolean
+    ) : DiffUtil.ItemCallback<S>() {
+        // Formally used for adding/removing new items
         override fun areItemsTheSame(oldItem: S, newItem: S): Boolean =
             oldItem.isTheSameWith(newItem)
 
-        override fun areContentsTheSame(oldItem: S, newItem: S): Boolean = false
+        // Used for all other section data updates including list
+        override fun areContentsTheSame(oldItem: S, newItem: S): Boolean =
+            oldItem.isContentTheSameWith(newItem) || areSectionsStatic
     }
 
 }

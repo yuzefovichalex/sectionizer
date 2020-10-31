@@ -1,9 +1,13 @@
 package com.alexyuzefovich.sectionizer
 
+import androidx.annotation.IntDef
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
-abstract class Section<T, A>
+abstract class Section<T, A>(
+    @AdapterPolicy
+    private val adapterPolicy: Int = SWAP
+)
         where A : RecyclerView.Adapter<*>,
               A : SectionAdapter<T>
 {
@@ -14,6 +18,15 @@ abstract class Section<T, A>
         fun onLoadError(throwable: Throwable?)
     }
 
+    companion object {
+        const val RESET = 0
+        const val SWAP = 1
+    }
+
+    @IntDef(RESET, SWAP)
+    @Retention(AnnotationRetention.SOURCE)
+    annotation class AdapterPolicy
+
 
     abstract val adapter: A
 
@@ -21,9 +34,17 @@ abstract class Section<T, A>
 
     abstract fun isTheSameWith(another: Section<*, *>): Boolean
 
+    abstract fun isContentTheSameWith(another: Section<*, *>): Boolean
+
     internal fun loadInto(viewHolder: SectionsAdapter.ViewHolder<*>) {
         with(viewHolder) {
-            sectionRV.adapter = adapter
+            with(sectionRV) {
+                if (adapter == null || adapterPolicy == RESET) {
+                    adapter = this@Section.adapter
+                } else {
+                    swapAdapter(this@Section.adapter, false)
+                }
+            }
             loadCallback?.onLoadStart()
             sectionDataLoader.coroutineScope.launch {
                 when (val result = sectionDataLoader.loadData()) {

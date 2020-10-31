@@ -14,4 +14,6 @@ abstract class HorizontalSection<T, A> : Section<T, A>()
     override fun isTheSameWith(another: Section<*, *>): Boolean =
         another is HorizontalSection && name == another.name
 
+    override fun isContentTheSameWith(another: Section<*, *>): Boolean = true
+
 }
