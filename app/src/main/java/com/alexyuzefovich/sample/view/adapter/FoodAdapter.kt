@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ItemFoodBinding
 import com.alexyuzefovich.sample.model.Food
 import com.alexyuzefovich.sample.util.glide
 import com.alexyuzefovich.sectionizer.SectionAdapter
 
-class FoodAdapter :
+class FoodAdapter(
+    private val itemClickListener: (Food) -> Unit
+) :
     ListAdapter<Food, FoodAdapter.ViewHolder>(DiffUtilCallback),
     SectionAdapter<Food>
 {
@@ -33,7 +34,14 @@ class FoodAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemFoodBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        val viewHolder = ViewHolder(binding)
+        binding.apply {
+            root.setOnClickListener {
+                val clickedItem = getItem(viewHolder.adapterPosition)
+                itemClickListener(clickedItem)
+            }
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

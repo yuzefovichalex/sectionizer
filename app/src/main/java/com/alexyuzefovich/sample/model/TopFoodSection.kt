@@ -5,6 +5,10 @@ import com.alexyuzefovich.sectionizer.SectionDataLoader
 
 class TopFoodSection(
     override val name: String,
-    override val adapter: FoodAdapter,
-    override val sectionDataLoader: SectionDataLoader<Food, *>
-) : VerticalSection<Food, FoodAdapter>()
+    override val sectionDataLoader: SectionDataLoader<Food, *>,
+    itemClickListener: (Food) -> Unit
+) : VerticalSection<Food, FoodAdapter>() {
+
+    override val adapter: FoodAdapter = FoodAdapter(itemClickListener)
+
+}

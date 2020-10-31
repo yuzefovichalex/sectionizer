@@ -8,9 +8,6 @@ import com.alexyuzefovich.sample.databinding.ActivityMainBinding
 import com.alexyuzefovich.sample.model.CoffeeTimeSection
 import com.alexyuzefovich.sample.model.FoodCategorySection
 import com.alexyuzefovich.sample.model.TopFoodSection
-import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
 import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
 import com.alexyuzefovich.sample.viewmodel.MainViewModel
 
@@ -35,17 +32,14 @@ class MainActivity : AppCompatActivity() {
         val sections = listOf(
             TopFoodSection(
                 getString(R.string.on_a_pedestal),
-                FoodAdapter(),
                 mainViewModel.topFoodLoader
-            ),
+            ) { },
             CoffeeTimeSection(
                 getString(R.string.coffee_time),
-                CoffeeAdapter(),
                 mainViewModel.coffeeLoader
             ),
             FoodCategorySection(
                 getString(R.string.food_categories),
-                FoodCategoryAdapter(),
                 mainViewModel.foodCategoryLoader
             )
         )
