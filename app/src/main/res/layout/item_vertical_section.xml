@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/seeAllButton"
         app:layout_constraintBottom_toBottomOf="@id/barrier"
-        style="@style/Text.Large"
+        style="@style/SectionHeader"
         tools:text="Catergories"/>
 
     <ImageButton

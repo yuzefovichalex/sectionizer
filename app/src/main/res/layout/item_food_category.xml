@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_0_5x"
             android:gravity="center"
-            style="@style/Text.Small"
+            style="@style/Text.Small.ListTitle"
             tools:text="Burgers" />
 
     </LinearLayout>
