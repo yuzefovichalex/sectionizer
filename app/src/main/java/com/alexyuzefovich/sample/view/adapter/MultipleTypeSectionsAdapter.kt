@@ -25,7 +25,7 @@ class MultipleTypeSectionsAdapter :
 
     override fun getItemViewType(position: Int): Int =
         when (position) {
-            0 -> VERTICAL_SECTION
+            1 -> VERTICAL_SECTION
             else -> HORIZONTAL_SECTION
         }
 
@@ -40,7 +40,7 @@ class MultipleTypeSectionsAdapter :
             HORIZONTAL_SECTION -> {
                 val binding = ItemHorizontalSectionBinding.inflate(inflater, parent, false).apply {
                     itemList.addItemDecoration(
-                        HorizontalSpaceItemDecoration(8.dp)
+                        HorizontalSpaceItemDecoration(16.dp)
                     )
                 }
                 HorizontalViewHolder(binding) as ViewHolder<Section<*, *>>

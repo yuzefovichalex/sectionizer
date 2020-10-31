@@ -6,9 +6,12 @@ data class FoodCategory(
     @SerializedName("id")
     val id: Long,
 
+    @SerializedName("icon")
+    val icon: String,
+
     @SerializedName("name")
     val name: String,
 
-    @SerializedName("image")
-    val image: String
+    @SerializedName("color")
+    val color: String
 )

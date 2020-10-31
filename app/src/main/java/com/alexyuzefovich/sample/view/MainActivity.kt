@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSections() {
         val sections = listOf(
+            FoodCategorySection(
+                getString(R.string.food_categories_title),
+                mainViewModel.foodCategoryLoader
+            ),
             TopFoodSection(
                 getString(R.string.on_a_pedestal),
                 mainViewModel.topFoodLoader
@@ -37,10 +41,6 @@ class MainActivity : AppCompatActivity() {
             CoffeeTimeSection(
                 getString(R.string.coffee_time),
                 mainViewModel.coffeeLoader
-            ),
-            FoodCategorySection(
-                getString(R.string.food_categories),
-                mainViewModel.foodCategoryLoader
             )
         )
         binding.sections.adapter = MultipleTypeSectionsAdapter().apply {

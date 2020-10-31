@@ -1,6 +1,7 @@
 package com.alexyuzefovich.sample.util
 
 import android.content.res.Resources
+import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
@@ -13,6 +14,12 @@ val Int.dp: Int
 fun ImageView.glide(url: String) {
     Glide.with(this)
         .load(url)
+        .into(this)
+}
+
+fun ImageView.glide(uri: Uri) {
+    Glide.with(this)
+        .load(uri)
         .into(this)
 }
 

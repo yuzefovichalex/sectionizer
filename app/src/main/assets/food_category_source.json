@@ -2,16 +2,43 @@
   {
     "id": 21,
     "name": "Burgers",
-    "image": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_burger_40dp",
+    "color": "#c95b48"
   },
   {
     "id": 22,
     "name": "Pizza",
-    "image": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/aa296022291277.5630fdb41e9f2.jpg"
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_pizza_slice_40dp",
+    "color": "#b88400"
   },
   {
     "id": 23,
+    "name": "Kebabs",
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_kebab_40dp",
+    "color": "#adad16"
+  },
+  {
+    "id": 24,
+    "name": "Noodles",
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_noodles_40dp",
+    "color": "#c78874"
+  },
+  {
+    "id": 25,
+    "name": "Desserts",
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_donut_40dp",
+    "color": "#9a579c"
+  },
+  {
+    "id": 26,
+    "name": "Ice Cream",
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_ice_cream_40dp",
+    "color": "#447ca1"
+  },
+  {
+    "id": 27,
     "name": "Coffee",
-    "image": "https://images.unsplash.com/photo-1523942839745-7848c839b661?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    "icon": "android.resource://com.alexyuzefovich.sectionizer/drawable/ic_coffee_40dp",
+    "color": "#692b07"
   }
 ]

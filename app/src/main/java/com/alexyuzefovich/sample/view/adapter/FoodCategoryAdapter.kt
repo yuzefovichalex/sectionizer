@@ -1,7 +1,10 @@
 package com.alexyuzefovich.sample.view.adapter
 
+import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -48,8 +51,19 @@ class FoodCategoryAdapter :
 
         fun bind(foodCategory: FoodCategory) {
             with(binding) {
-                cover.glide(foodCategory.image)
-                name.text = foodCategory.name
+                val iconUri = Uri.parse(foodCategory.icon)
+                val primaryColor = Color.parseColor(foodCategory.color)
+                val secondaryColor = ColorUtils.blendARGB(primaryColor, Color.WHITE, 0.75f)
+
+                container.setCardBackgroundColor(secondaryColor)
+                icon.apply {
+                    glide(iconUri)
+                    setColorFilter(primaryColor)
+                }
+                name.apply {
+                    text = foodCategory.name
+                    setTextColor(primaryColor)
+                }
             }
         }
 

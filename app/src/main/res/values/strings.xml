@@ -3,6 +3,6 @@
 
     <string name="on_a_pedestal">On a pedestal</string>
     <string name="coffee_time">Coffee time</string>
-    <string name="food_categories">Food categories</string>
+    <string name="food_categories_title">Find what you like</string>
     <string name="cost">%f$</string>
 </resources>

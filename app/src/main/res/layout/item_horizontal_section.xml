@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clipChildren="false">
 
     <TextView
         android:id="@+id/name"
@@ -42,10 +43,11 @@
         android:id="@+id/itemList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_1x"
         android:orientation="horizontal"
         android:paddingStart="@dimen/space_2x"
+        android:paddingTop="@dimen/space_1x"
         android:paddingEnd="@dimen/space_2x"
+        android:paddingBottom="@dimen/space_1x"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
