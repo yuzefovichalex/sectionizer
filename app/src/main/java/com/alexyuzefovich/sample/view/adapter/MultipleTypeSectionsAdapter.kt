@@ -8,7 +8,7 @@ import com.alexyuzefovich.sample.databinding.ItemHorizontalSectionBinding
 import com.alexyuzefovich.sample.databinding.ItemVerticalSectionBinding
 import com.alexyuzefovich.sample.model.HorizontalSection
 import com.alexyuzefovich.sample.model.VerticalSection
-import com.alexyuzefovich.sample.util.HorizontalSpaceItemDecoration
+import com.alexyuzefovich.sample.util.SpaceItemDecoration
 import com.alexyuzefovich.sample.util.dp
 import com.alexyuzefovich.sectionizer.Section
 import com.alexyuzefovich.sectionizer.SectionsAdapter
@@ -34,13 +34,17 @@ class MultipleTypeSectionsAdapter :
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             VERTICAL_SECTION -> {
-                val binding = ItemVerticalSectionBinding.inflate(inflater, parent, false)
+                val binding = ItemVerticalSectionBinding.inflate(inflater, parent, false).apply {
+                    itemList.addItemDecoration(
+                        SpaceItemDecoration(24.dp, RecyclerView.VERTICAL)
+                    )
+                }
                 VerticalViewHolder(binding) as ViewHolder<Section<*, *>>
             }
             HORIZONTAL_SECTION -> {
                 val binding = ItemHorizontalSectionBinding.inflate(inflater, parent, false).apply {
                     itemList.addItemDecoration(
-                        HorizontalSpaceItemDecoration(16.dp)
+                        SpaceItemDecoration(16.dp, RecyclerView.HORIZONTAL)
                     )
                 }
                 HorizontalViewHolder(binding) as ViewHolder<Section<*, *>>

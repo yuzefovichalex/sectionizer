@@ -3,11 +3,13 @@ package com.alexyuzefovich.sample.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ActivityMainBinding
 import com.alexyuzefovich.sample.model.CoffeeTimeSection
 import com.alexyuzefovich.sample.model.FoodCategorySection
 import com.alexyuzefovich.sample.model.TopFoodSection
+import com.alexyuzefovich.sample.util.SpaceItemDecoration
 import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
 import com.alexyuzefovich.sample.viewmodel.MainViewModel
 
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.foodCategoryLoader
             ),
             TopFoodSection(
-                getString(R.string.on_a_pedestal),
+                getString(R.string.top_food_title),
                 mainViewModel.topFoodLoader
             ) { },
             CoffeeTimeSection(
@@ -43,8 +45,16 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.coffeeLoader
             )
         )
-        binding.sections.adapter = MultipleTypeSectionsAdapter().apply {
-            submitList(sections)
+        with(binding.sections) {
+            adapter = MultipleTypeSectionsAdapter().apply {
+                submitList(sections)
+            }
+            addItemDecoration(
+                SpaceItemDecoration(
+                    resources.getDimensionPixelOffset(R.dimen.space_2x),
+                    RecyclerView.VERTICAL
+                )
+            )
         }
     }
 

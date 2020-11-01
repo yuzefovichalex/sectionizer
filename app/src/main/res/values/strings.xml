@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Sectionizer</string>
 
-    <string name="on_a_pedestal">On a pedestal</string>
+    <string name="top_food_title">Chef recommends</string>
     <string name="coffee_time">Coffee time</string>
-    <string name="food_categories_title">Find what you like</string>
+    <string name="food_categories_title">Let\'s find what you like</string>
     <string name="cost">%f$</string>
+    <string name="ratings">(%d ratings)</string>
 </resources>

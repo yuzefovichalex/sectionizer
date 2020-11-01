@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ItemFoodBinding
 import com.alexyuzefovich.sample.model.Food
 import com.alexyuzefovich.sample.util.glide
@@ -61,7 +62,11 @@ class FoodAdapter(
 
         fun bind(food: Food) {
             with(binding) {
-                image.glide(food.imageUrl)
+                cover.glide(food.imageUrl)
+                name.text = food.name
+                description.text = food.description
+                rate.text = "${food.rate}"
+                reviewCount.text = context.getString(R.string.ratings, food.votes)
             }
         }
 

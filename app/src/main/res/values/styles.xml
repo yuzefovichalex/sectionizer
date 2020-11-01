@@ -9,6 +9,11 @@
     <style name="Text">
         <item name="android:fontFamily">@font/lato_regular</item>
         <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.Secondary">
+        <item name="android:alpha">0.3</item>
     </style>
 
     <style name="Text.Small">
@@ -39,8 +44,9 @@
         <item name="android:fontFamily">@font/lato_semibold</item>
     </style>
 
-    <style name="Text.Medium.ListTitle">
+    <style name="Text.ListTitle">
         <item name="android:fontFamily">@font/lato_semibold</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="SectionHeader" parent="Text.Large">
