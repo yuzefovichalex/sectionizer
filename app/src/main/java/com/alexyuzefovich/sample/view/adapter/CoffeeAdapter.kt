@@ -40,6 +40,8 @@ class CoffeeAdapter :
         holder.bind(getItem(position))
     }
 
+    override fun getData(): List<Coffee> = currentList
+
     override fun submitData(items: List<Coffee>) {
         submitList(items)
     }

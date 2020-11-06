@@ -38,11 +38,30 @@ abstract class Section<T, A>(
 
     internal fun loadInto(viewHolder: SectionsAdapter.ViewHolder<*>) {
         with(viewHolder) {
-            with(sectionRV) {
-                if (adapter == null || adapterPolicy == RESET) {
-                    adapter = this@Section.adapter
+            val previousAdapter = sectionRV.adapter
+            // If new RecyclerView already has adapter and this is current Section.adapter object, do nothing
+            if (previousAdapter != adapter) {
+                // Fully set (reset) when:
+                // - first set (no adapter)
+                // - new adapter hasn't same type as previous
+                // - section has AdapterPolicy.RESET
+                // In other cases we swap adapter to prevent visual data updates. This means we don't
+                // remove views and viewHolders and try to find differences and animate them
+                if (previousAdapter == null
+                    || previousAdapter.javaClass != adapter.javaClass
+                    || adapterPolicy == RESET
+                ) {
+                    sectionRV.adapter = adapter
                 } else {
-                    swapAdapter(this@Section.adapter, false)
+                    if (previousAdapter is SectionAdapter<*>) {
+                        // We need to prepopulate new adapter with data from previous adapter for
+                        // correct RecyclerView.swapAdapter behavior.
+                        // Important: it's not tested when submitData will take a lot of time,
+                        // so in these cases behavior is unexpected
+                        @Suppress("UNCHECKED_CAST")
+                        adapter.submitData(previousAdapter.getData() as List<T>)
+                    }
+                    sectionRV.swapAdapter(adapter, false)
                 }
             }
             loadCallback?.onLoadStart()

@@ -49,6 +49,8 @@ class FoodAdapter(
         holder.bind(getItem(position))
     }
 
+    override fun getData(): List<Food> = currentList
+
     override fun submitData(items: List<Food>) {
         submitList(items)
     }
