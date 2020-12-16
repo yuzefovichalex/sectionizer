@@ -2,7 +2,9 @@ package com.alexyuzefovich.sectionizer
 
 import androidx.annotation.IntDef
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class Section<T, A>(
     @AdapterPolicy
@@ -66,7 +68,10 @@ abstract class Section<T, A>(
             }
             loadCallback?.onLoadStart()
             sectionDataLoader.coroutineScope.launch {
-                when (val result = sectionDataLoader.loadData()) {
+                val result = withContext(Dispatchers.IO) {
+                    sectionDataLoader.loadData()
+                }
+                when (result) {
                     is LoadResult.Success -> {
                         loadCallback?.onLoadSuccess()
                         adapter.submitData(result.items)

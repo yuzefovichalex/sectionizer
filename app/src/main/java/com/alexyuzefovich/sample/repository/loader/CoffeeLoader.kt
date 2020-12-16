@@ -14,7 +14,7 @@ class CoffeeLoader(
 
     override val params: LoadParams = LoadParams.EMPTY
 
-    override fun loadData(): LoadResult<Coffee> {
+    override suspend fun loadData(): LoadResult<Coffee> {
         val coffee = repository.loadCoffee()
         return LoadResult.Success(coffee)
     }

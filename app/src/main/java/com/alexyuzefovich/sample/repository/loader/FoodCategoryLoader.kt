@@ -14,7 +14,7 @@ class FoodCategoryLoader(
 
     override val params: LoadParams = LoadParams.EMPTY
 
-    override fun loadData(): LoadResult<FoodCategory> {
+    override suspend fun loadData(): LoadResult<FoodCategory> {
         val foodCategories = repository.loadFoodCategories()
         return LoadResult.Success(foodCategories)
     }

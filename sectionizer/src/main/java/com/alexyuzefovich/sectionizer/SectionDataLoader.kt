@@ -8,6 +8,6 @@ abstract class SectionDataLoader<T, P : LoadParams>(
 
     abstract val params: P
 
-    abstract fun loadData(): LoadResult<T>
+    abstract suspend fun loadData(): LoadResult<T>
 
 }
