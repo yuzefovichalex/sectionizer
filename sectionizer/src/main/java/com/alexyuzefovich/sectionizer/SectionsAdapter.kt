@@ -1,6 +1,7 @@
 package com.alexyuzefovich.sectionizer
 
 import android.view.View
+import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -22,18 +23,29 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         holder.bindAndLoadData(getItem(position))
     }
 
+    @CallSuper
+    override fun onViewAttachedToWindow(holder: VH) {
+        holder.getSectionForAdapterPosition()?.dataController?.startDataRequests()
+    }
+
+    @CallSuper
+    override fun onViewDetachedFromWindow(holder: VH) {
+        holder.getSectionForAdapterPosition()?.dataController?.stopDataRequests()
+    }
+
+    private fun ViewHolder<S>.getSectionForAdapterPosition(): S? =
+        getItem(adapterPosition)
+
 
     abstract class ViewHolder<S : Section<*, *>>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         abstract val sectionRV: RecyclerView
 
-        var loadCallback: Section.LoadCallback? = null
-
         open fun bind(section: S) { }
 
         internal fun bindAndLoadData(section: S) {
+            section.attachAdapter(this)
             bind(section)
-            section.loadInto(this)
         }
 
     }

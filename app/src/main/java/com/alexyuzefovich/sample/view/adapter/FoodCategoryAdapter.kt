@@ -8,6 +8,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.databinding.ItemFoodCategoryBinding
 import com.alexyuzefovich.sample.model.FoodCategory
 import com.alexyuzefovich.sample.util.glide
@@ -15,7 +16,8 @@ import com.alexyuzefovich.sectionizer.SectionAdapter
 
 class FoodCategoryAdapter :
     ListAdapter<FoodCategory, FoodCategoryAdapter.ViewHolder>(DiffUtilCallback),
-    SectionAdapter<FoodCategory>
+    SectionAdapter<FoodCategory>,
+    DataListener<FoodCategory>
 {
 
     companion object DiffUtilCallback : DiffUtil.ItemCallback<FoodCategory>() {
@@ -41,10 +43,14 @@ class FoodCategoryAdapter :
         holder.bind(getItem(position))
     }
 
-    override fun getData(): List<FoodCategory> = currentList
+    override fun getLatestSnapshot(): List<FoodCategory> = currentList
 
-    override fun submitData(items: List<FoodCategory>) {
-        submitList(items)
+    override fun restoreFromSnapshot(snapshot: List<FoodCategory>) {
+        submitList(snapshot)
+    }
+
+    override fun onDataReady(data: List<FoodCategory>) {
+        submitList(data)
     }
 
     class ViewHolder(

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
+import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.databinding.ItemFoodBinding
 import com.alexyuzefovich.sample.model.Food
 import com.alexyuzefovich.sample.util.glide
@@ -16,7 +17,8 @@ class FoodAdapter(
     private val itemClickListener: (Food) -> Unit
 ) :
     ListAdapter<Food, FoodAdapter.ViewHolder>(DiffUtilCallback),
-    SectionAdapter<Food>
+    SectionAdapter<Food>,
+    DataListener<Food>
 {
 
     companion object DiffUtilCallback : DiffUtil.ItemCallback<Food>() {
@@ -49,10 +51,14 @@ class FoodAdapter(
         holder.bind(getItem(position))
     }
 
-    override fun getData(): List<Food> = currentList
+    override fun getLatestSnapshot(): List<Food> = currentList
 
-    override fun submitData(items: List<Food>) {
-        submitList(items)
+    override fun restoreFromSnapshot(snapshot: List<Food>) {
+        submitList(snapshot)
+    }
+
+    override fun onDataReady(data: List<Food>) {
+        submitList(data)
     }
 
     class ViewHolder(

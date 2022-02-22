@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
+import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.databinding.ItemCoffeeBinding
 import com.alexyuzefovich.sample.model.Coffee
 import com.alexyuzefovich.sample.util.glide
@@ -14,7 +15,8 @@ import com.alexyuzefovich.sectionizer.SectionAdapter
 
 class CoffeeAdapter :
     ListAdapter<Coffee, CoffeeAdapter.ViewHolder>(DiffUtilCallback),
-    SectionAdapter<Coffee>
+    SectionAdapter<Coffee>,
+    DataListener<Coffee>
 {
 
     companion object DiffUtilCallback : DiffUtil.ItemCallback<Coffee>() {
@@ -40,10 +42,14 @@ class CoffeeAdapter :
         holder.bind(getItem(position))
     }
 
-    override fun getData(): List<Coffee> = currentList
+    override fun getLatestSnapshot(): List<Coffee> = currentList
 
-    override fun submitData(items: List<Coffee>) {
-        submitList(items)
+    override fun restoreFromSnapshot(snapshot: List<Coffee>) {
+        submitList(snapshot)
+    }
+
+    override fun onDataReady(data: List<Coffee>) {
+        submitList(data)
     }
 
     class ViewHolder(

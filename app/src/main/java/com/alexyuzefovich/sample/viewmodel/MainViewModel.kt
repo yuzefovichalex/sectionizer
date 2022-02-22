@@ -3,19 +3,30 @@ package com.alexyuzefovich.sample.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.alexyuzefovich.sample.repository.SampleRepository
-import com.alexyuzefovich.sample.repository.loader.CoffeeLoader
-import com.alexyuzefovich.sample.repository.loader.FoodCategoryLoader
-import com.alexyuzefovich.sample.repository.loader.TopFoodLoader
+import com.alexyuzefovich.sample.data.DataExecutor
+import com.alexyuzefovich.sample.data.DataListener
+import com.alexyuzefovich.sample.data.SampleRepository
+import com.alexyuzefovich.sample.model.Coffee
+import com.alexyuzefovich.sample.model.Food
+import com.alexyuzefovich.sample.model.FoodCategory
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: SampleRepository = SampleRepository(application)
 
-    val topFoodLoader: TopFoodLoader = TopFoodLoader(repository, viewModelScope)
+    fun createTopFoodDataExecutor(dataListener: DataListener<Food>): DataExecutor<Food> =
+        DataExecutor(dataListener, viewModelScope) {
+            repository.loadTopFood()
+        }
 
-    val coffeeLoader: CoffeeLoader = CoffeeLoader(repository, viewModelScope)
+    fun createFoodCategoryDataExecutor(dataListener: DataListener<FoodCategory>): DataExecutor<FoodCategory> =
+        DataExecutor(dataListener, viewModelScope) {
+            repository.loadFoodCategories()
+        }
 
-    val foodCategoryLoader: FoodCategoryLoader = FoodCategoryLoader(repository, viewModelScope)
+    fun createCoffeeTimeDataExecutor(dataListener: DataListener<Coffee>): DataExecutor<Coffee> =
+        DataExecutor(dataListener, viewModelScope) {
+            repository.loadCoffee()
+        }
 
 }

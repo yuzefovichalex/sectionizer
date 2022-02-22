@@ -13,6 +13,9 @@ import com.alexyuzefovich.sample.model.CoffeeTimeSection
 import com.alexyuzefovich.sample.model.FoodCategorySection
 import com.alexyuzefovich.sample.model.TopFoodSection
 import com.alexyuzefovich.sample.util.SpaceItemDecoration
+import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
+import com.alexyuzefovich.sample.view.adapter.FoodAdapter
+import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
 import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
 import com.alexyuzefovich.sample.viewmodel.MainViewModel
 
@@ -57,18 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSections() {
         val sections = listOf(
-            FoodCategorySection(
-                getString(R.string.food_categories_title),
-                mainViewModel.foodCategoryLoader
-            ),
-            TopFoodSection(
-                getString(R.string.top_food_title),
-                mainViewModel.topFoodLoader
-            ) { },
-            CoffeeTimeSection(
-                getString(R.string.coffee_time),
-                mainViewModel.coffeeLoader
-            )
+            createFoodCategorySection(),
+            createTopFoodSection(),
+            createCoffeeTimeSection()
         )
         with(binding.sections) {
             adapter = MultipleTypeSectionsAdapter().apply {
@@ -81,6 +75,36 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    private fun createFoodCategorySection(): FoodCategorySection {
+        val adapter = FoodCategoryAdapter()
+        val dataExecutor = mainViewModel.createFoodCategoryDataExecutor(adapter)
+        return FoodCategorySection(
+            getString(R.string.food_categories_title),
+            adapter,
+            dataExecutor
+        )
+    }
+
+    private fun createTopFoodSection(): TopFoodSection {
+        val adapter = FoodAdapter { }
+        val dataExecutor = mainViewModel.createTopFoodDataExecutor(adapter)
+        return TopFoodSection(
+            getString(R.string.top_food_title),
+            adapter,
+            dataExecutor
+        )
+    }
+
+    private fun createCoffeeTimeSection(): CoffeeTimeSection {
+        val adapter = CoffeeAdapter()
+        val dataExecutor = mainViewModel.createCoffeeTimeDataExecutor(adapter)
+        return CoffeeTimeSection(
+            getString(R.string.coffee_time),
+            adapter,
+            dataExecutor
+        )
     }
 
 }

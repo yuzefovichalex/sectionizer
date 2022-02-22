@@ -1,14 +1,23 @@
 package com.alexyuzefovich.sample.model
 
+import com.alexyuzefovich.sample.data.DataExecutor
 import com.alexyuzefovich.sample.view.adapter.FoodAdapter
-import com.alexyuzefovich.sectionizer.SectionDataLoader
+import com.alexyuzefovich.sectionizer.DataController
 
 class TopFoodSection(
     override val name: String,
-    override val sectionDataLoader: SectionDataLoader<Food, *>,
-    itemClickListener: (Food) -> Unit
+    override val adapter: FoodAdapter,
+    private val dataExecutor: DataExecutor<Food>
 ) : VerticalSection<Food, FoodAdapter>() {
 
-    override val adapter: FoodAdapter = FoodAdapter(itemClickListener)
+    override val dataController: DataController = object : DataController {
+        override fun startDataRequests() {
+            dataExecutor.execute()
+        }
+
+        override fun stopDataRequests() {
+
+        }
+    }
 
 }

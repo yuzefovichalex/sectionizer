@@ -2,7 +2,6 @@ package com.alexyuzefovich.sample.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.databinding.ItemHorizontalSectionBinding
 import com.alexyuzefovich.sample.databinding.ItemVerticalSectionBinding
@@ -12,7 +11,6 @@ import com.alexyuzefovich.sample.util.SpaceItemDecoration
 import com.alexyuzefovich.sample.util.dp
 import com.alexyuzefovich.sectionizer.Section
 import com.alexyuzefovich.sectionizer.SectionsAdapter
-import java.lang.IllegalArgumentException
 
 class MultipleTypeSectionsAdapter :
     SectionsAdapter<Section<*, *>, SectionsAdapter.ViewHolder<Section<*, *>>>()
@@ -59,20 +57,6 @@ class MultipleTypeSectionsAdapter :
 
         override val sectionRV: RecyclerView
             get() = binding.itemList
-
-
-        init {
-            loadCallback = object : Section.LoadCallback {
-                override fun onLoadStart() { }
-
-                override fun onLoadSuccess() { }
-
-                override fun onLoadError(throwable: Throwable?) {
-                    Toast.makeText(binding.root.context, "Error", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
 
         override fun bind(section: VerticalSection<*, *>) {
             with(binding) {

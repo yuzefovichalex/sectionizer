@@ -1,8 +1,6 @@
 package com.alexyuzefovich.sectionizer
 
 interface SectionAdapter<T> {
-
-    fun getData(): List<T>
-    fun submitData(items: List<T>)
-
+    fun restoreFromSnapshot(snapshot: List<T>)
+    fun getLatestSnapshot(): List<T>
 }
