@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.view
+package com.alexyuzefovich.sample.presentation.view
 
 import android.os.Build
 import android.os.Bundle
@@ -9,15 +9,15 @@ import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ActivityMainBinding
-import com.alexyuzefovich.sample.model.CoffeeTimeSection
-import com.alexyuzefovich.sample.model.FoodCategorySection
-import com.alexyuzefovich.sample.model.TopFoodSection
+import com.alexyuzefovich.sample.presentation.view.model.CoffeeTimeSection
+import com.alexyuzefovich.sample.presentation.view.model.FoodCategorySection
+import com.alexyuzefovich.sample.presentation.view.model.TopFoodSection
 import com.alexyuzefovich.sample.util.SpaceItemDecoration
-import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodAdapter
-import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
-import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
-import com.alexyuzefovich.sample.viewmodel.MainViewModel
+import com.alexyuzefovich.sample.presentation.view.adapter.items.CoffeeAdapter
+import com.alexyuzefovich.sample.presentation.view.adapter.items.FoodAdapter
+import com.alexyuzefovich.sample.presentation.view.adapter.items.FoodCategoryAdapter
+import com.alexyuzefovich.sample.presentation.view.adapter.sections.MultipleTypeSectionsAdapter
+import com.alexyuzefovich.sample.presentation.viewmodel.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.model
+package com.alexyuzefovich.sample.data.model
 
 import com.google.gson.annotations.SerializedName
 

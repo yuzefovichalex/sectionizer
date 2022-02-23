@@ -1,7 +1,8 @@
-package com.alexyuzefovich.sample.model
+package com.alexyuzefovich.sample.presentation.view.model
 
 import com.alexyuzefovich.sample.data.DataExecutor
-import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
+import com.alexyuzefovich.sample.data.model.FoodCategory
+import com.alexyuzefovich.sample.presentation.view.adapter.items.FoodCategoryAdapter
 import com.alexyuzefovich.sectionizer.DataController
 
 class FoodCategorySection(

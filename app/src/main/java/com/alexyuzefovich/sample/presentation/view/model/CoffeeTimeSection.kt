@@ -1,7 +1,8 @@
-package com.alexyuzefovich.sample.model
+package com.alexyuzefovich.sample.presentation.view.model
 
 import com.alexyuzefovich.sample.data.DataExecutor
-import com.alexyuzefovich.sample.view.adapter.CoffeeAdapter
+import com.alexyuzefovich.sample.data.model.Coffee
+import com.alexyuzefovich.sample.presentation.view.adapter.items.CoffeeAdapter
 import com.alexyuzefovich.sectionizer.DataController
 
 class CoffeeTimeSection(

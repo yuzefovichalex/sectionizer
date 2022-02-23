@@ -1,9 +1,9 @@
 package com.alexyuzefovich.sample.data
 
 import android.content.Context
-import com.alexyuzefovich.sample.model.Coffee
-import com.alexyuzefovich.sample.model.Food
-import com.alexyuzefovich.sample.model.FoodCategory
+import com.alexyuzefovich.sample.data.model.Coffee
+import com.alexyuzefovich.sample.data.model.Food
+import com.alexyuzefovich.sample.data.model.FoodCategory
 import com.alexyuzefovich.sample.util.fromJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

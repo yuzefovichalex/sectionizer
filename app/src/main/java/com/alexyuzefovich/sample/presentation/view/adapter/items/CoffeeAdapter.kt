@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.view.adapter
+package com.alexyuzefovich.sample.presentation.view.adapter.items
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.databinding.ItemCoffeeBinding
-import com.alexyuzefovich.sample.model.Coffee
+import com.alexyuzefovich.sample.data.model.Coffee
 import com.alexyuzefovich.sample.util.glide
 import com.alexyuzefovich.sectionizer.SectionAdapter
 

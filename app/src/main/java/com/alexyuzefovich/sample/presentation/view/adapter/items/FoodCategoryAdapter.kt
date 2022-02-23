@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.view.adapter
+package com.alexyuzefovich.sample.presentation.view.adapter.items
 
 import android.graphics.Color
 import android.net.Uri
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.databinding.ItemFoodCategoryBinding
-import com.alexyuzefovich.sample.model.FoodCategory
+import com.alexyuzefovich.sample.data.model.FoodCategory
 import com.alexyuzefovich.sample.util.glide
 import com.alexyuzefovich.sectionizer.SectionAdapter
 

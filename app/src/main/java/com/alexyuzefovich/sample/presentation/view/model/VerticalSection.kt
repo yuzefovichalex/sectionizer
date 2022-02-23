@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.model
+package com.alexyuzefovich.sample.presentation.view.model
 
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sectionizer.Section

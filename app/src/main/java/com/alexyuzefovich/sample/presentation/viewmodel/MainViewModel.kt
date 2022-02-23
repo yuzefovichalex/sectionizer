@@ -1,4 +1,4 @@
-package com.alexyuzefovich.sample.viewmodel
+package com.alexyuzefovich.sample.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.alexyuzefovich.sample.data.DataExecutor
 import com.alexyuzefovich.sample.data.DataListener
 import com.alexyuzefovich.sample.data.SampleRepository
-import com.alexyuzefovich.sample.model.Coffee
-import com.alexyuzefovich.sample.model.Food
-import com.alexyuzefovich.sample.model.FoodCategory
+import com.alexyuzefovich.sample.data.model.Coffee
+import com.alexyuzefovich.sample.data.model.Food
+import com.alexyuzefovich.sample.data.model.FoodCategory
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 

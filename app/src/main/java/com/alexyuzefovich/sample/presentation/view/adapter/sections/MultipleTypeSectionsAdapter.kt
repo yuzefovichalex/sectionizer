@@ -1,12 +1,12 @@
-package com.alexyuzefovich.sample.view.adapter
+package com.alexyuzefovich.sample.presentation.view.adapter.sections
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.databinding.ItemHorizontalSectionBinding
 import com.alexyuzefovich.sample.databinding.ItemVerticalSectionBinding
-import com.alexyuzefovich.sample.model.HorizontalSection
-import com.alexyuzefovich.sample.model.VerticalSection
+import com.alexyuzefovich.sample.presentation.view.model.HorizontalSection
+import com.alexyuzefovich.sample.presentation.view.model.VerticalSection
 import com.alexyuzefovich.sample.util.SpaceItemDecoration
 import com.alexyuzefovich.sample.util.dp
 import com.alexyuzefovich.sectionizer.Section
