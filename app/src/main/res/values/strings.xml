@@ -4,6 +4,7 @@
     <string name="top_food_title">Chef recommends</string>
     <string name="coffee_time">Coffee time</string>
     <string name="food_categories_title">Let\'s find what you like</string>
-    <string name="cost">%f$</string>
+    <string name="cost">%.2f$</string>
     <string name="ratings">(%d ratings)</string>
+    <string name="view_more">View more</string>
 </resources>

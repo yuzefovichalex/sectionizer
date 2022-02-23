@@ -25,6 +25,7 @@
         android:id="@+id/seeAllButton"
         android:layout_marginEnd="@dimen/space_2x"
         android:src="@drawable/ic_arrow_right"
+        android:contentDescription="@string/view_more"
         app:layout_constraintStart_toEndOf="@id/name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -2,10 +2,10 @@ package com.alexyuzefovich.sample.view
 
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alexyuzefovich.sample.R
 import com.alexyuzefovich.sample.databinding.ActivityMainBinding
@@ -18,6 +18,7 @@ import com.alexyuzefovich.sample.view.adapter.FoodAdapter
 import com.alexyuzefovich.sample.view.adapter.FoodCategoryAdapter
 import com.alexyuzefovich.sample.view.adapter.MultipleTypeSectionsAdapter
 import com.alexyuzefovich.sample.viewmodel.MainViewModel
+import dev.chrisbanes.insetter.applyInsetter
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,22 +40,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun enableFullScreenMode() {
         with(window) {
-            val systemUiVisibilityFlag: Int
-            val statusBarColorResId: Int
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                systemUiVisibilityFlag = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-                statusBarColorResId = R.color.colorWhiteAlpha85
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+            val statusBarColorResId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                R.color.colorWhiteAlpha85
             } else {
-                systemUiVisibilityFlag = (View.SYSTEM_UI_FLAG_IMMERSIVE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-                statusBarColorResId = R.color.colorBlackAlpha15
+                R.color.colorBlackAlpha15
             }
-            decorView.systemUiVisibility = systemUiVisibilityFlag
             statusBarColor = ContextCompat.getColor(this@MainActivity, statusBarColorResId)
+        }
+
+        binding.sections.applyInsetter {
+            type(statusBars = true) {
+                padding()
+            }
         }
     }
 
