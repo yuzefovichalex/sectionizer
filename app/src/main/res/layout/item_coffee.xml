@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/space_6x">
+        android:layout_marginTop="@dimen/space_6x"
+        app:cardBackgroundColor="@color/colorCoffeeLight">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -43,6 +44,7 @@
                 android:paddingBottom="@dimen/space_0_5x"
                 android:paddingEnd="@dimen/space_1x"
                 android:background="@drawable/shape_rounded_small"
+                android:backgroundTint="@color/colorCoffeeDark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 app:layout_constraintEnd_toEndOf="parent"

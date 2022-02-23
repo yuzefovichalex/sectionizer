@@ -6,6 +6,9 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
 
+    <color name="colorCoffeeLight">#FFe9e2d7</color>
+    <color name="colorCoffeeDark">#FFAA8D61</color>
+
     <color name="colorWhiteAlpha85">#D9FFFFFF</color>
     <color name="colorBlackAlpha15">#26000000</color>
     <color name="colorBlackAlpha50">#80000000</color>
