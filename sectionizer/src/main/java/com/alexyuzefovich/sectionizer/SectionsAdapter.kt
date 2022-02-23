@@ -34,7 +34,7 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
     }
 
     private fun ViewHolder<S>.getSectionForAdapterPosition(): S? =
-        getItem(adapterPosition)
+        getItem(bindingAdapterPosition)
 
 
     abstract class ViewHolder<S : Section<*, *>>(itemView: View) : RecyclerView.ViewHolder(itemView) {
