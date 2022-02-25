@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.sections.applyInsetter {
-            type(statusBars = true) {
+            type(statusBars = true, navigationBars = true) {
                 padding()
             }
         }
