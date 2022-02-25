@@ -27,7 +27,6 @@ data class Coffee(
     val cost: Float
 )
 ```
-</br>
 
 ### 2. Model adapter
 
@@ -60,11 +59,10 @@ class CoffeeAdapter :
 
 }
 ```
-</br>
 
 ### 3. Section
 
-Now let's create our section. Here we need to define the internal list **Adapter**, the **DataExecutor**, which will start and stop receiving/listening data, as well as the logic for comparing sections with each other:
+Now let's create our section. Here we need to define the internal list **Adapter**, the **DataController**, which will start and stop receiving/listening data, as well as the logic for comparing sections with each other:
 
 ```kotlin
 class CoffeeTimeSection(
@@ -93,8 +91,6 @@ class CoffeeTimeSection(
 ```
 
 Keep in mind that you are in control of the data transfer to the adapter. In the example you can see that the section accepts the DataExecutor. In turn, the DataExecutor can accept some kind of DataListener interface, which will listen for data from the DataExecutor. This interface can be implemented directly by your Adapter, so data from the DataExecutor will be passed directly to the Adapter. You can see an example of this implementation in the sample app of the project.
-
-</br>
 
 ### 4. Section adapter
 
@@ -149,8 +145,6 @@ sectionsAdapter<Coffee> { parent ->
 ```
 
 That's all :) You can find more advanced examples, including sections with different types of lists (vertical and horizontal) in the sample app of this project.
-
-</br>
 
 ## License
 
