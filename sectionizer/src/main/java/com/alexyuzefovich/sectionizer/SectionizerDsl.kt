@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView
  *              binding.root
  *          ) { section ->
  *              with(binding) {
- *                  title.text = itemSection.name
- *                  description.text = itemSection.description
+ *                  title.text = section.name
+ *                  description.text = section.description
  *              }
  *          }
  *      }
