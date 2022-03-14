@@ -1,8 +1,31 @@
 # Sectionizer
 
+[![](https://jitpack.io/v/yuzefovichalex/sectionizer.svg)](https://jitpack.io/#yuzefovichalex/sectionizer)
+
 Quite often we may have the task of creating a list, each element of which is a set of data that includes a nested list. Often we have to write quite a lot of boilerplate code to do this. Sectionizer takes control of the basic tasks of controlling root and child lists, and allows you to speed up sectional list creation.
 
 ![](images/sample.png)
+
+## How to get
+
+Add the repository in root build.gradle:
+
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Add the dependency in module build.gradle:
+
+```groovy
+dependencies {
+    implementation 'com.github.yuzefovichalex:sectionizer:<latest-version>'
+}
+```
 
 ## Usage
 
@@ -145,6 +168,14 @@ sectionsAdapter<Coffee> { parent ->
 ```
 
 That's all :) You can find more advanced examples, including sections with different types of lists (vertical and horizontal) in the sample app of this project.
+
+## Version info
+
+The latest lib version: **1.0.0**
+
+Minimum SDK: **21**
+
+Target SDK: **31**
 
 ## License
 
