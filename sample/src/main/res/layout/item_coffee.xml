@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_6x"
+        app:cardBackgroundColor="@color/colorCoffeeLight">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="112dp"
+            android:paddingStart="@dimen/space_2x"
+            android:paddingTop="@dimen/space_6x"
+            android:paddingEnd="@dimen/space_2x"
+            android:paddingBottom="@dimen/space_2x">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Text.Small.ListTitle"
+                tools:text="Espresso"/>
+
+            <TextView
+                android:id="@+id/cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_1x"
+                android:paddingTop="@dimen/space_0_5x"
+                android:paddingStart="@dimen/space_1x"
+                android:paddingBottom="@dimen/space_0_5x"
+                android:paddingEnd="@dimen/space_1x"
+                android:background="@drawable/shape_rounded_small"
+                android:backgroundTint="@color/colorCoffeeDark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Text.Light.Small"
+                tools:text="3.00$"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_gravity="center_horizontal"
+        android:elevation="@dimen/default_card_elevation"
+        android:contentDescription="@string/coffee_time"/>
+
+</FrameLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/cover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:elevation="@dimen/default_card_elevation"
+        app:shapeAppearance="@style/RoundedShape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="h,16:9"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Text.ListTitle"
+        tools:text="Pizza Napoletana"/>
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_0_5x"
+        app:drawableStartCompat="@drawable/ic_star_12dp"
+        android:drawablePadding="@dimen/space_0_5x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        style="@style/Text.Medium"
+        tools:text="4.3" />
+
+    <TextView
+        android:id="@+id/reviewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_0_5x"
+        android:alpha="0.7"
+        app:layout_constraintStart_toEndOf="@id/rate"
+        app:layout_constraintTop_toTopOf="@id/rate"
+        app:layout_constraintBottom_toBottomOf="@id/rate"
+        style="@style/Text"
+        tools:text="(369 ratings)"/>
+
+    <ImageView
+        android:id="@+id/descriptionIcon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_note_16dp"
+        android:alpha="0.3"
+        android:contentDescription="@string/top_food_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/description"/>
+
+    <View
+        android:id="@+id/decor"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_0_5x"
+        android:background="@color/colorBlack"
+        android:alpha="0.3"
+        app:layout_constraintStart_toStartOf="@id/descriptionIcon"
+        app:layout_constraintTop_toBottomOf="@id/descriptionIcon"
+        app:layout_constraintEnd_toEndOf="@id/descriptionIcon"
+        app:layout_constraintBottom_toBottomOf="@id/description"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_1x"
+        android:layout_marginTop="@dimen/space_1x"
+        android:maxLines="3"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/descriptionIcon"
+        app:layout_constraintTop_toBottomOf="@id/rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Text.Secondary"
+        tools:text="Italy’s most emblematic culinary creation, the genuine pizza Napoletana is made with just a few simple ingredients and prepared in only two variations – marinara, the basic Neapolitan pizza topped with a tomato-based sauce flavored with garlic and oregano, and margherita, which is topped with tomatoes, mozzarella, and fresh basil leaves, a delicious combination whose colors are said to represent the Italian flag."/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

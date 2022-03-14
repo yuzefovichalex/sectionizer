@@ -1,0 +1,70 @@
+<resources>
+    <style name="Text">
+        <item name="android:fontFamily">@font/lato_regular</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.Secondary">
+        <item name="android:alpha">0.3</item>
+    </style>
+
+    <style name="Text.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text.Medium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.Large">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Text.Light">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Text.Light.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text.Light.Medium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.Light.Large">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Text.Small.ListTitle">
+        <item name="android:fontFamily">@font/lato_semibold</item>
+    </style>
+
+    <style name="Text.ListTitle">
+        <item name="android:fontFamily">@font/lato_semibold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SectionHeader" parent="Text.Large">
+        <item name="android:fontFamily">@font/lato_semibold</item>
+    </style>
+
+    <style name="RoundedShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ImageButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/default_corner_radius</item>
+        <item name="cardElevation">@dimen/default_card_elevation</item>
+    </style>
+
+</resources>

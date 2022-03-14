@@ -1,0 +1,57 @@
+[
+  {
+    "id": 31,
+    "name": "Pizza Napoletana",
+    "description": "Italy’s most emblematic culinary creation, the genuine pizza Napoletana is made with just a few simple ingredients and prepared in only two variations – marinara, the basic Neapolitan pizza topped with a tomato-based sauce flavored with garlic and oregano, and margherita, which is topped with tomatoes, mozzarella, and fresh basil leaves, a delicious combination whose colors are said to represent the Italian flag.",
+    "ingredients": "Flour, tomato, mozzarella, basil, olive oil, oregano, salt",
+    "cooking_time": "5-15 min",
+    "image": "https://www.bigodino.it/wp-content/uploads/2018/10/museo-della-pizza-new-york1.jpg",
+    "rate": 4.3,
+    "votes": 758,
+    "cost": 15.5
+  },
+  {
+    "id": 32,
+    "name": "Burger",
+    "description": "A quintessential American food, burger evolved from the German Deutsches beefsteak, according to the New York Times food critic Mimi Sheraton. Its other name (hamburger) is a result of the fact that many German immigrants originally came from the port of Hamburg.",
+    "ingredients": "Beef, burger bun, cheese, salad, onion, ketchup, tomato",
+    "cooking_time": "5-10 min",
+    "image": "https://images.unsplash.com/photo-1552913902-366e726db79e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+    "rate": 4.3,
+    "votes": 894,
+    "cost": 9.9
+  },
+  {
+    "id": 33,
+    "name": "Pasta al pomodoro",
+    "description": "Pasta al pomodoro is a traditional Italian dish consisting of pasta (most commonly spaghetti, although any type of pasta can be used), fresh tomatoes, basil, and olive oil. Some say the key to making a great pasta al pomodoro lies in the addition of pasta water to the dish in its finishing stages.",
+    "ingredients": "Olive oil, basil, tomato, spaghetti",
+    "cooking_time": "15-20 min",
+    "image": "https://www.calendariodelciboitaliano.it/wp-content/uploads/2017/06/pastapomodoroheaderok.jpg",
+    "rate": 4.0,
+    "votes": 984,
+    "cost": 8.0
+  },
+  {
+    "id": 34,
+    "name": "Gyros",
+    "description": "Gyros is one of the most popular Greek street food dishes, consisting of meat such as pork and chicken (in Greece) or lamb and veal (popular in other countries) cooked on a vertical spit. The meat is sliced in thin shavings and is then usually placed in a pita bread along with sauces such as tzatziki and vegetables such as tomatoes, onions, lettuce, and cucumbers.",
+    "ingredients": "Chicken, pita bread, tzatziki, tomato, onion, olive oil, garlic, vinegar, thyme, oregano, lettuce, cucumber",
+    "cooking_time": "20-30 min",
+    "image": "https://cdn.tasteatlas.com/images/dishes/254a002208804e0fa92fa354655fdaac.jpg",
+    "rate": 4.4,
+    "votes": 489,
+    "cost": 8.99
+  },
+  {
+    "id": 35,
+    "name": "Sushi",
+    "description": "Sushi is Japan's most famous culinary representative, typically made with rice and fillings which have been rolled inside a a sheet of dry seaweed. However, the term sushi is actually an umbrella term covering a wide range of subvarieties which can be made with a myriad of different ingredients and in as many forms and presentations.",
+    "ingredients": "Seafood, nori, shiitake, surimi, persian cucumber, scallion",
+    "cooking_time": "20-30 min",
+    "image": "https://images.unsplash.com/photo-1572364575972-5ac19824a5ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+    "rate": 4.3,
+    "votes": 971,
+    "cost": 10.0
+  }
+]
