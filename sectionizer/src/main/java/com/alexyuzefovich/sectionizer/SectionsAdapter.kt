@@ -39,7 +39,8 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         }
     }
 
-    final override fun onBindViewHolder(holder: VH, position: Int) {
+    @CallSuper
+    override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindAndLoadData(getItem(position))
     }
 
