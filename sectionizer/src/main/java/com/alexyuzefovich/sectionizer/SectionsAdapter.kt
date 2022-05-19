@@ -54,7 +54,9 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
     }
 
     private fun ViewHolder<S>.getSectionForAdapterPosition(): S? =
-        getItem(bindingAdapterPosition)
+        bindingAdapterPosition
+            .takeIf { it != RecyclerView.NO_POSITION }
+            ?.let { getItem(it) }
 
 
     /**
