@@ -39,7 +39,8 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         }
     }
 
-    final override fun onBindViewHolder(holder: VH, position: Int) {
+    @CallSuper
+    override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindAndLoadData(getItem(position))
     }
 
@@ -54,7 +55,9 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
     }
 
     private fun ViewHolder<S>.getSectionForAdapterPosition(): S? =
-        getItem(bindingAdapterPosition)
+        bindingAdapterPosition
+            .takeIf { it != RecyclerView.NO_POSITION }
+            ?.let { getItem(it) }
 
 
     /**
