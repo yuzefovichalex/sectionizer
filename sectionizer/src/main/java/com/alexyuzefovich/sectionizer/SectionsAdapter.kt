@@ -19,16 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
  * so animations can be ugly for sections. That's why animations are disabled by default.
  * You can enable them again by overriding the onAttachToRecyclerView method.
  *
- * @param areSectionsStatic Indicate whether section content is always the same.
- * This can be useful when the list content is static and does not need to be updated (e.g., a local json file).
- * In such cases, specify true, and the sections will be compared by the selected identifier in the [Section.isTheSameWith] method.
- * Otherwise, if the data is dynamic, specify false (default value).
+ * In cases when you have static [Section]'s content (e.g. immutable list from local JSON file)
+ * and don't expect content change behavior (only add/move/remove ops) you can make [Section.isContentTheSameWith]
+ * always return true, since this method is used inside [SectionsAdapter] to determine content changes.
  *
  * @author Alexander Yuzefovich
  * */
-abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>>(
-    areSectionsStatic: Boolean = false
-) : ListAdapter<S, VH>(DiffUtilCallback(areSectionsStatic)) {
+abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> : ListAdapter<S, VH>(DiffUtilCallback()) {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         // Disable animations to prevent glitches on Section updates
@@ -81,16 +78,14 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
 
     }
 
-    private class DiffUtilCallback<S : Section<*, *>>(
-        private val areSectionsStatic: Boolean
-    ) : DiffUtil.ItemCallback<S>() {
-        // Formally used for adding/removing new items
+    private class DiffUtilCallback<S : Section<*, *>> : DiffUtil.ItemCallback<S>() {
+        // Formally used for adding/moving/removing new items
         override fun areItemsTheSame(oldItem: S, newItem: S): Boolean =
             oldItem.isTheSameWith(newItem)
 
         // Used for all other section data updates including list
         override fun areContentsTheSame(oldItem: S, newItem: S): Boolean =
-            oldItem.isContentTheSameWith(newItem) || areSectionsStatic
+            oldItem.isContentTheSameWith(newItem)
     }
 
 }
