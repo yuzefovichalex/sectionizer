@@ -19,16 +19,13 @@ import androidx.recyclerview.widget.RecyclerView
  * so animations can be ugly for sections. That's why animations are disabled by default.
  * You can enable them again by overriding the onAttachToRecyclerView method.
  *
- * @param areSectionsStatic Indicate whether section content is always the same.
- * This can be useful when the list content is static and does not need to be updated (e.g., a local json file).
- * In such cases, specify true, and the sections will be compared by the selected identifier in the [Section.isTheSameWith] method.
- * Otherwise, if the data is dynamic, specify false (default value).
+ * In cases when you have static [Section]'s content
+ * and don't expect content change behavior (only add/move/remove ops) you can make [Section.isContentTheSameWith]
+ * always return true, since this method is used inside [SectionsAdapter] to determine content changes.
  *
  * @author Alexander Yuzefovich
  * */
-abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>>(
-    areSectionsStatic: Boolean = false
-) : ListAdapter<S, VH>(DiffUtilCallback(areSectionsStatic)) {
+abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> : ListAdapter<S, VH>(DiffUtilCallback()) {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         // Disable animations to prevent glitches on Section updates
@@ -44,13 +41,61 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         holder.bindAndLoadData(getItem(position))
     }
 
-    @CallSuper
-    override fun onViewAttachedToWindow(holder: VH) {
-        holder.getSectionForAdapterPosition()?.dataController?.startDataRequests()
+    override fun submitList(list: List<S>?) {
+        submitList(list, null)
+    }
+
+    override fun submitList(list: List<S>?, commitCallback: Runnable?) {
+        submitList(list, commitCallback, false)
+    }
+
+    /**
+     * Since each [Section] holds its [Section.adapter], basically we want to keep it for the same item.
+     * For example, let's imagine we have a [Section] with some title (we store field for it inside).
+     * We don't store Section's list data inside it, but trigger [Section.dataController] to load data
+     * into the [Section.adapter]. When we update our Section list (e.g. add a new Section) we can pass
+     * fully new list object to our method with Sections with empty adapters. You will see that all
+     * our nested list data will disappear before the new one is loaded. To prevent this we try to
+     * keep all the old items that are presented in the new [list], so Sections will stay the same
+     * with the old adapters and old the data. And when data will be loaded via [Section.dataController]
+     * it can be used for smooth update.
+     *
+     * IMPORTANT! This behavior is strongly depends on the [Section.isTheSameWith] and [Section.isContentTheSameWith]
+     * methods implementation. Please see their description for correct implementation.
+     *
+     * @param forceUpdate Set to true if you don't want to keep old data, false otherwise.
+     * */
+    fun submitList(list: List<S>?, commitCallback: Runnable?, forceUpdate: Boolean) {
+        val listToSubmit = if (list.isNullOrEmpty()) {
+            list
+        } else {
+            val oldList = currentList
+            val mergedList = list.map { newItem ->
+                val oldItem = oldList.find { it.isTheSameWith(newItem) }
+                if (oldItem != null) {
+                    if (oldItem.isContentTheSameWith(newItem)) {
+                        oldItem
+                    } else {
+                        @Suppress("UNCHECKED_CAST")
+                        newItem.apply {
+                            val oldAdapter = oldItem.adapter as SectionAdapter<Any>
+                            val newAdapter = newItem.adapter as SectionAdapter<Any>
+                            newAdapter.restoreFromSnapshot(oldAdapter.getLatestSnapshot())
+                        }
+                    }
+                } else {
+                    newItem
+                }
+            }
+
+            mergedList
+        }
+
+        super.submitList(listToSubmit, commitCallback)
     }
 
     @CallSuper
-    override fun onViewDetachedFromWindow(holder: VH) {
+    override fun onViewRecycled(holder: VH) {
         holder.getSectionForAdapterPosition()?.dataController?.stopDataRequests()
     }
 
@@ -75,20 +120,25 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         internal fun bindAndLoadData(section: S) {
             section.attachAdapter(this)
             bind(section)
+
+            // Re-run data requests, so if User attaches callback to his DataController,
+            // it will be triggered.
+            with(section.dataController) {
+                stopDataRequests()
+                startDataRequests()
+            }
         }
 
     }
 
-    private class DiffUtilCallback<S : Section<*, *>>(
-        private val areSectionsStatic: Boolean
-    ) : DiffUtil.ItemCallback<S>() {
-        // Formally used for adding/removing new items
+    private class DiffUtilCallback<S : Section<*, *>> : DiffUtil.ItemCallback<S>() {
+        // Formally used for adding/moving/removing new items
         override fun areItemsTheSame(oldItem: S, newItem: S): Boolean =
             oldItem.isTheSameWith(newItem)
 
         // Used for all other section data updates including list
         override fun areContentsTheSame(oldItem: S, newItem: S): Boolean =
-            oldItem.isContentTheSameWith(newItem) || areSectionsStatic
+            oldItem.isContentTheSameWith(newItem)
     }
 
 }
