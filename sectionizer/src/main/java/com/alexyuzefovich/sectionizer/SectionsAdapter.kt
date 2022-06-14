@@ -45,12 +45,7 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
     }
 
     @CallSuper
-    override fun onViewAttachedToWindow(holder: VH) {
-        holder.getSectionForAdapterPosition()?.dataController?.startDataRequests()
-    }
-
-    @CallSuper
-    override fun onViewDetachedFromWindow(holder: VH) {
+    override fun onViewRecycled(holder: VH) {
         holder.getSectionForAdapterPosition()?.dataController?.stopDataRequests()
     }
 
@@ -75,6 +70,13 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         internal fun bindAndLoadData(section: S) {
             section.attachAdapter(this)
             bind(section)
+
+            // Re-run data requests, so if User attaches callback to his DataController,
+            // it will be triggered.
+            with(section.dataController) {
+                stopDataRequests()
+                startDataRequests()
+            }
         }
 
     }
