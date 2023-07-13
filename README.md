@@ -171,7 +171,7 @@ That's all :) You can find more advanced examples, including sections with diffe
 
 ## Version info
 
-The latest lib version: **1.1.0**
+The latest lib version: **1.1.1**
 
 Minimum SDK: **21**
 
