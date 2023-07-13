@@ -66,7 +66,7 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
      * @param forceUpdate Set to true if you don't want to keep old data, false otherwise.
      * */
     fun submitList(list: List<S>?, commitCallback: Runnable?, forceUpdate: Boolean) {
-        val listToSubmit = if (list.isNullOrEmpty()) {
+        val listToSubmit = if (list.isNullOrEmpty() || forceUpdate) {
             list
         } else {
             val oldList = currentList
