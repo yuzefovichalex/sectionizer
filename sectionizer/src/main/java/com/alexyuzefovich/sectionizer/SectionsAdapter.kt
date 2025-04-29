@@ -19,10 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
  * so animations can be ugly for sections. That's why animations are disabled by default.
  * You can enable them again by overriding the onAttachToRecyclerView method.
  *
- * In cases when you have static [Section]'s content
- * and don't expect content change behavior (only add/move/remove ops) you can make [Section.isContentTheSameWith]
- * always return true, since this method is used inside [SectionsAdapter] to determine content changes.
- *
  * @author Alexander Yuzefovich
  * */
 abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> : ListAdapter<S, VH>(DiffUtilCallback()) {
@@ -40,6 +36,28 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bindAndLoadData(getItem(position))
     }
+
+    final override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
+        val sectionChangePayload =
+            payloads.find { it is SectionChangePayload } as? SectionChangePayload
+        if (sectionChangePayload != null) {
+            val customPayload = sectionChangePayload.payload
+            if (customPayload != null) {
+                onBindViewHolder(holder, position, customPayload)
+                if (sectionChangePayload.shouldRefreshList) {
+                    holder.reloadData(getItem(position))
+                }
+                return
+            }
+        }
+
+        super.onBindViewHolder(holder, position, payloads)
+    }
+
+    /**
+     * Called when there is a diff payload for the section, that was defined in [Section.getDiffFrom].
+     * */
+    open fun onBindViewHolder(holder: VH, position: Int, payload: Any) { }
 
     override fun submitList(list: List<S>?) {
         submitList(list, null)
@@ -123,6 +141,10 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
 
             // Re-run data requests, so if User attaches callback to his DataController,
             // it will be triggered.
+            reloadData(section)
+        }
+
+        internal fun reloadData(section: S) {
             with(section.dataController) {
                 stopDataRequests()
                 startDataRequests()
@@ -136,9 +158,25 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
         override fun areItemsTheSame(oldItem: S, newItem: S): Boolean =
             oldItem.isTheSameWith(newItem)
 
-        // Used for all other section data updates including list
+        // Used for all other section data updates including list (if the list is not static)
         override fun areContentsTheSame(oldItem: S, newItem: S): Boolean =
-            oldItem.isContentTheSameWith(newItem)
+            oldItem.isContentTheSameWith(newItem) && newItem.hasStaticList()
+
+        override fun getChangePayload(oldItem: S, newItem: S): Any {
+            val contentDiff = oldItem.getDiffFrom(newItem)
+            return SectionChangePayload(!newItem.hasStaticList(), contentDiff)
+        }
     }
+
+    /**
+     * Wrapper for a diff payload defined in [Section.getDiffFrom] as well as an indicator for the
+     * list refresh.
+     *
+     * @author Alexander Yuzefovich
+     * */
+    private data class SectionChangePayload(
+        val shouldRefreshList: Boolean,
+        val payload: Any?
+    )
 
 }
