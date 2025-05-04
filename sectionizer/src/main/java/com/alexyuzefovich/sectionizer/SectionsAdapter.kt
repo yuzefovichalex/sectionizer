@@ -21,7 +21,8 @@ import androidx.recyclerview.widget.RecyclerView
  *
  * @author Alexander Yuzefovich
  * */
-abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> : ListAdapter<S, VH>(DiffUtilCallback()) {
+abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolder<S>> :
+    ListAdapter<S, VH>(DiffUtilCallback()) {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         // Disable animations to prevent glitches on Section updates
@@ -127,21 +128,34 @@ abstract class SectionsAdapter<S : Section<*, *>, VH : SectionsAdapter.ViewHolde
      * Simple ViewHolder to setup Section's View (e.g. define header text etc.).
      *
      * You need to define internal [sectionRV] and just setup your ViewHolder in [bind] method, that
-     * called by [SectionsAdapter.onBindViewHolder] method.
+     * called by [SectionsAdapter.onBindViewHolder] method. Sometimes the section may be without
+     * a list for some reason - in such cases [sectionRV] may be null.
      * */
-    abstract class ViewHolder<S : Section<*, *>>(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract class ViewHolder<S : Section<*, *>>(
+        itemView: View
+    ) : RecyclerView.ViewHolder(itemView) {
 
-        abstract val sectionRV: RecyclerView
+        abstract val sectionRV: RecyclerView?
 
         open fun bind(section: S) { }
 
         internal fun bindAndLoadData(section: S) {
-            section.attachAdapter(this)
+            attachAdapter(section.adapter)
             bind(section)
 
             // Re-run data requests, so if User attaches callback to his DataController,
             // it will be triggered.
-            reloadData(section)
+            if (sectionRV != null) {
+                reloadData(section)
+            }
+        }
+
+        private fun attachAdapter(adapter: RecyclerView.Adapter<*>) {
+            sectionRV?.let {
+                if (it.adapter != adapter) {
+                    it.adapter = adapter
+                }
+            }
         }
 
         internal fun reloadData(section: S) {

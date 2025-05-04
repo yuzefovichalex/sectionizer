@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Alexander Yuzefovich
  * */
 abstract class Section<T, A>
-        where A : SectionAdapter<T>,
-              A : RecyclerView.Adapter<*>
+        where A : RecyclerView.Adapter<*>,
+              A : SectionAdapter<T>
+
 {
 
     /**
@@ -86,17 +87,5 @@ abstract class Section<T, A>
      * If you'd like to not trigger this update, this method should return true.
      * */
     open fun hasStaticList(): Boolean = false
-
-    /**
-     * Attaches adapter to [viewHolder]'s RecyclerView if needed.
-     * */
-    internal fun attachAdapter(viewHolder: SectionsAdapter.ViewHolder<*>) {
-        with(viewHolder) {
-            val previousAdapter = sectionRV.adapter
-            if (previousAdapter != adapter) {
-                sectionRV.adapter = adapter
-            }
-        }
-    }
 
 }
